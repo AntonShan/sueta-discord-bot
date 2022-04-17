@@ -1,43 +1,46 @@
 import { Injectable } from '@nestjs/common';
-import { SuetaOptionDto, suetasData } from './data/suetas.data';
-import { Trial, trials } from './data/trials.data';
-import { UtilsService } from './utils.service';
 import { DifficultyCurve } from './types/difficulty-curve.type';
-import { SuetaDto } from './data/sueta.dto';
+import { ActivitiesService } from '../data/activities/activities.service';
+import { TrialService } from '../data/trial/trial.service';
+import { ResultingActivity } from '../data/activities/activities.types';
+import { Sueta } from './data/sueta.dto';
+import { Trial } from '../data/trial/trial.types';
+import { LocalizationOption } from './types/localization-option';
 
 @Injectable()
 export class SuetaService {
-  constructor(private readonly utilsService: UtilsService) {}
+  constructor(
+    private readonly activitiesService: ActivitiesService,
+    private readonly trialsService: TrialService,
+  ) {}
 
-  roll(difficulty: DifficultyCurve): SuetaDto {
-    const sueta = new SuetaDto();
-    sueta.trial = this.rollTrial(difficulty);
-    sueta.suetaList = this.rollSuetaList(difficulty);
+  async roll(
+    difficulty: DifficultyCurve,
+    locale: LocalizationOption,
+  ): Promise<Sueta> {
+    const sueta = new Sueta();
+    const [trial, activityList] = await Promise.all([
+      this.rollTrial(difficulty),
+      this.rollSuetaList(difficulty, locale),
+    ]);
+
+    sueta.trial = trial;
+    sueta.activityList = activityList;
 
     return sueta;
   }
 
   private rollTrial(difficulty: DifficultyCurve): Trial {
-    const [trial] = this.utilsService.randomNoRepeats(trials, 1);
-    return trial;
+    return this.trialsService.getTrial();
   }
 
-  private rollSuetaList(difficulty: DifficultyCurve): SuetaOptionDto[] {
-    return this.utilsService
-      .randomNoRepeats(suetasData, difficulty)
-      .map((action) => {
-        const result = new SuetaOptionDto();
-        result.name = action.name;
-        result.description =
-          typeof action.description === 'function' &&
-          Array.isArray(action.mods) &&
-          action.mods.length > 0
-            ? action.description(
-                this.utilsService.randomNoRepeats(action.mods, 1)[0],
-              )
-            : (action.description as string);
-
-        return result;
-      });
+  private rollSuetaList(
+    difficulty: DifficultyCurve,
+    locale: LocalizationOption,
+  ): ResultingActivity[] {
+    return this.activitiesService.getActivitiesForDifficulty(
+      difficulty,
+      locale,
+    );
   }
 }

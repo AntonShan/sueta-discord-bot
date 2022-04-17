@@ -3,6 +3,8 @@ import { ConfigFactory, ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
 
 import { SuetaModule } from './sueta/sueta.module';
+import { CommonModule } from './common/common.module';
+import { DataModule } from './data/data.module';
 
 const validationSchema = Joi.object({
   DISCORD_TOKEN: Joi.string().required(),
@@ -28,6 +30,8 @@ const configuration: ConfigFactory<AppConfig> = () => ({
       load: [configuration],
     }),
     SuetaModule,
+    CommonModule,
+    DataModule,
   ],
   controllers: [],
   providers: [],

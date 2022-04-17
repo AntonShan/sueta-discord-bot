@@ -1,7 +1,7 @@
-import { Trial } from './trials.data';
-import { SuetaOptionDto } from './suetas.data';
+import { ResultingActivity } from '../../data/activities/activities.types';
+import { Trial } from '../../data/trial/trial.types';
 
-export class SuetaDto {
+export class Sueta {
   trial: Trial;
-  suetaList: SuetaOptionDto[] = [];
+  activityList: ResultingActivity[] = [];
 }

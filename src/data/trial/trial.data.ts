@@ -1,6 +1,6 @@
-export type Trial = string;
+import { Trial } from './trial.types';
 
-export const trials: Trial[] = [
+export const trials: Readonly<Trial[]> = Object.freeze([
   'Aetherian Archive',
   'Aetherian Archive HM',
   'Hel-Ra Citadel',
@@ -10,5 +10,6 @@ export const trials: Trial[] = [
   'Maw of Lorkhaj',
   'Maw of Lorkhaj HM',
   'Sunspire',
+  'Sunspire Hardmode',
   'Rockgrove',
-];
+]);

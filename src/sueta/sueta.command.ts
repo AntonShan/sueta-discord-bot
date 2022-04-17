@@ -10,6 +10,7 @@ import { TransformPipe } from '@discord-nestjs/common';
 import { MessageEmbed, WebhookEditMessageOptions } from 'discord.js';
 import { SuetaDto } from './dto/sueta.dto';
 import { SuetaService } from './sueta.service';
+import { LocalizationOption } from './types/localization-option';
 
 @Command({
   name: 'sueta',
@@ -26,20 +27,23 @@ export class SuetaCommand implements DiscordTransformedCommand<SuetaDto> {
   ): Promise<void> {
     await interaction.interaction.deferReply();
 
-    const { difficulty } = dto;
+    const { difficulty, locale = LocalizationOption.ru } = dto;
 
-    const reply = this.roll(difficulty + 1);
+    const reply = await this.roll(difficulty + 1, locale);
 
     await interaction.interaction.editReply(reply);
   }
 
-  roll(difficulty: number): WebhookEditMessageOptions {
+  async roll(
+    difficulty: number,
+    locale: LocalizationOption,
+  ): Promise<WebhookEditMessageOptions> {
     const embed = new MessageEmbed();
 
-    const sueta = this.suetaService.roll(difficulty);
+    const sueta = await this.suetaService.roll(difficulty, locale);
 
     embed.setTitle(sueta.trial);
-    sueta.suetaList.forEach((v) =>
+    sueta.activityList.forEach((v) =>
       embed.addField(v.name, v.description as string),
     );
 

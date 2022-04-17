@@ -1,5 +1,6 @@
 import { Choice, Param, ParamType } from '@discord-nestjs/core';
 import { DifficultyCurve } from '../types/difficulty-curve.type';
+import { LocalizationOption } from '../types/localization-option';
 
 export class SuetaDto {
   @Choice(DifficultyCurve)
@@ -8,4 +9,11 @@ export class SuetaDto {
     type: ParamType.INTEGER,
   })
   difficulty: DifficultyCurve;
+
+  @Choice(LocalizationOption)
+  @Param({
+    description: 'Locale you want to see result in',
+    type: ParamType.STRING,
+  })
+  locale: LocalizationOption;
 }
