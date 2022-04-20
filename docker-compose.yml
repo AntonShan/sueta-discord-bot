@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  sueta-bot:
+    image: 'ghcr.io/antonshan/sueta-bot:0.0.1'
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 768M
+        reservations:
+          cpus: '0.25'
+          memory: 512M
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    environment:
+      DISCORD_TOKEN: ${DISCORD_TOKEN}

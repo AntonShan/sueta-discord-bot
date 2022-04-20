@@ -314,7 +314,7 @@ export const activities: Readonly<Activity[]> = Object.freeze([
   },
   {
     name: 'Furry convention',
-    description: 'Every group member must have the same race',
+    description: 'Every group member must have the same race.',
     mods: ['Race - Argonian', 'Race - Khajiit'],
     translations: new Map([
       [
@@ -322,7 +322,7 @@ export const activities: Readonly<Activity[]> = Object.freeze([
         {
           name: 'Обратная дискриминация',
           description:
-            'Каждый член группы должен быть на персонаже одного указанной расы',
+            'Каждый член группы должен быть на персонаже одного указанной расы.',
           mods: ['Раса - аргонианин', 'Раса - каджит'],
         },
       ],
