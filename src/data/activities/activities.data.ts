@@ -3,9 +3,9 @@ import { LocalizationOption } from '../../sueta/types/localization-option';
 
 export const activities: Readonly<Activity[]> = Object.freeze([
   {
-    name: 'Not enough tanks',
+    name: 'Maximum protection',
     description:
-      'Every group member has to have Sword&Board on at least one bar',
+      'All group members must have a Sword&Board equipped on at least one bar',
     translations: new Map([
       [
         LocalizationOption.ru,
@@ -18,8 +18,8 @@ export const activities: Readonly<Activity[]> = Object.freeze([
     ]),
   },
   {
-    name: 'Off-meta players',
-    description: 'No barswaps allowed',
+    name: 'The off-meta meta',
+    description: 'No bar swapping allowed',
     translations: new Map([
       [
         LocalizationOption.ru,
@@ -44,7 +44,7 @@ export const activities: Readonly<Activity[]> = Object.freeze([
   {
     name: 'Healthy breeze around my privates',
     description:
-      'Every group member must have pants slot empty. Gear and outfit-wise',
+      'All group members must wear no pants — both gear and outfit wise',
     translations: new Map([
       [
         LocalizationOption.ru,
@@ -57,7 +57,7 @@ export const activities: Readonly<Activity[]> = Object.freeze([
     ]),
   },
   {
-    name: 'The Dummy',
+    name: 'Training Dummy',
     description: 'All tanks must have at least 70k HP',
     translations: new Map([
       [
@@ -70,8 +70,8 @@ export const activities: Readonly<Activity[]> = Object.freeze([
     ]),
   },
   {
-    name: 'The Egoism',
-    description: 'No buff sets on any group member',
+    name: 'Every Man For Himself',
+    description: 'No one can use any buff sets',
     translations: new Map([
       [
         LocalizationOption.ru,
@@ -86,7 +86,7 @@ export const activities: Readonly<Activity[]> = Object.freeze([
   {
     name: "Tanks? Never heard of 'em",
     description:
-      '12 dps group. Some of dps can use S&B and heavy armor but must do damage as well. Only allowed taunt is Inner Fire',
+      '12 DD group. Some DDs can use S&B and heavy armor but must do damage as well. The only taunt allowed is Inner Fire',
     translations: new Map([
       [
         LocalizationOption.ru,
@@ -100,7 +100,7 @@ export const activities: Readonly<Activity[]> = Object.freeze([
   },
   {
     name: 'Fisting',
-    description: 'Group members must have no weapons equipped',
+    description: 'All group members must have no weapons equipped',
     translations: new Map([
       [
         LocalizationOption.ru,
@@ -112,7 +112,7 @@ export const activities: Readonly<Activity[]> = Object.freeze([
     ]),
   },
   {
-    name: 'One life only',
+    name: 'Hardcore mode',
     description:
       'Resurrection is forbidden. Members who died must leave the instance',
     translations: new Map([
@@ -128,7 +128,7 @@ export const activities: Readonly<Activity[]> = Object.freeze([
   },
   {
     name: "Good 'ol days",
-    description: 'Raid ends when vitality points reach zero',
+    description: 'The raid ends when vitality reaches zero',
     translations: new Map([
       [
         LocalizationOption.ru,
@@ -142,37 +142,37 @@ export const activities: Readonly<Activity[]> = Object.freeze([
   },
   {
     name: 'Wall Street Gang',
-    description: `Players donate gold when they die. After raid ends, gold is split between top three players with least deaths.`,
+    description: `Players have to donate gold every time they die. After the raid ends, that gold is split between the top three players with the least deaths`,
     translations: new Map([
       [
         LocalizationOption.ru,
         {
           name: 'Клуб миллионеров',
           description:
-            'За каждую смерть игрок догатит золото. После окончания рейда золото делится между топ 3 с наименьшим количеством смертей.',
+            'За каждую смерть игрок донатит золото. После окончания рейда золото делится между топ 3 с наименьшим количеством смертей.',
           mods: [
             'Отдаваемая голда: 1',
-            'Отдаваемая голда: 1000',
-            'Отдаваемая голда: 10000',
-            'Отдаваемая голда: 100000',
-            'Отдаваемая голда: 500000 ',
-            'Отдаваемая голда: 1000000',
+            'Отдаваемая голда: 1,000',
+            'Отдаваемая голда: 10,000',
+            'Отдаваемая голда: 100,000',
+            'Отдаваемая голда: 500,000',
+            'Отдаваемая голда: 1,000,000',
           ],
         },
       ],
     ]),
     mods: [
       'Amount donated: 1 gold',
-      'Amount donated: 1000 gold',
-      'Amount donated: 10000 gold',
-      'Amount donated: 100000 gold',
-      'Amount donated: 500000 gold ',
-      'Amount donated: 1000000 gold',
+      'Amount donated: 1,000 gold',
+      'Amount donated: 10,000 gold',
+      'Amount donated: 100,000 gold',
+      'Amount donated: 500,000 gold',
+      'Amount donated: 1,000,000 gold',
     ],
   },
   {
-    name: 'Illusion of choice',
-    description: 'Every group member has to have the same class',
+    name: 'The illusion of free choice',
+    description: 'Every group member must have the same class',
     mods: [
       'Class - Sorcerer',
       'Class - Nightblade',
@@ -187,7 +187,7 @@ export const activities: Readonly<Activity[]> = Object.freeze([
         {
           name: 'Иллюзия выбора',
           description:
-            'каждый член группы должен быть на персонаже одного указанного класса',
+            'Каждый член группы должен быть на персонаже одного указанного класса',
           mods: [
             'Класс - Чародей',
             'Класс - Найтблейд',
@@ -202,7 +202,8 @@ export const activities: Readonly<Activity[]> = Object.freeze([
   },
   {
     name: 'Not so fast',
-    description: 'All movement in boss fights is performed in walking mode',
+    description:
+      'All movement during boss fights has to be performed in walking mode',
     translations: new Map([
       [
         LocalizationOption.ru,
@@ -215,9 +216,9 @@ export const activities: Readonly<Activity[]> = Object.freeze([
     ]),
   },
   {
-    name: 'Visit to the Zoo',
+    name: 'Zoo escape',
     description:
-      'Every group member has to have maximum possible amount of combat pets',
+      'Every group member has to have the maximum possible amount of combat pets out at all times',
     translations: new Map([
       [
         LocalizationOption.ru,
@@ -230,8 +231,8 @@ export const activities: Readonly<Activity[]> = Object.freeze([
     ]),
   },
   {
-    name: "I don't know what class I am",
-    description: 'No class skills except passives are allowed',
+    name: 'Class-less warfare',
+    description: 'No active class skills allowed',
     translations: new Map([
       [
         LocalizationOption.ru,
@@ -243,8 +244,8 @@ export const activities: Readonly<Activity[]> = Object.freeze([
     ]),
   },
   {
-    name: 'Say it to my face',
-    description: 'Skills and weapons with more than 5m range are forbidden',
+    name: 'Up close and personal',
+    description: 'No ranged (>5m) weapons or skills allowed',
     translations: new Map([
       [
         LocalizationOption.ru,
@@ -257,8 +258,9 @@ export const activities: Readonly<Activity[]> = Object.freeze([
     ]),
   },
   {
-    name: 'Reaction of butterfly. Agility of mongoose',
-    description: 'Skills and weapons with more than 5m range are forbidden',
+    name: 'Walk it off',
+    description:
+      'No healing sets or skills allowed. You can still use shields and damage-reducing skills like Barrier',
     translations: new Map([
       [
         LocalizationOption.ru,
@@ -272,7 +274,7 @@ export const activities: Readonly<Activity[]> = Object.freeze([
   },
   {
     name: 'I did the best with what I had',
-    description: 'Only PvP sourced sets are allowed',
+    description: 'Only PvP-sourced sets allowed',
     translations: new Map([
       [
         LocalizationOption.ru,
@@ -284,29 +286,44 @@ export const activities: Readonly<Activity[]> = Object.freeze([
     ]),
   },
   {
-    name: 'Dirty Peasant',
-    description:
-      'Every item players wear must be of crafted set in white quality',
+    name: 'Dirty Plebs',
+    description: 'Only white quality crafted gear allowed',
     translations: new Map([
       [
         LocalizationOption.ru,
         {
-          name: 'Нет денег',
+          name: 'Белорусский трикотаж',
           description: 'Разрешены только крафтовые сеты в белом качестве',
         },
       ],
     ]),
   },
   {
-    name: 'Dirty Peasant',
-    description:
-      'Every item players wear must be of crafted set in white quality',
+    name: 'Survivor',
+    description: 'After every wipe group votes to kick one player',
     translations: new Map([
       [
         LocalizationOption.ru,
         {
-          name: 'Нет денег',
-          description: 'Разрешены только крафтовые сеты в белом качестве',
+          name: 'Последний герой',
+          description:
+            'После каждого вайпа группа голосует за кик одного из членов группы',
+        },
+      ],
+    ]),
+  },
+  {
+    name: 'Furry convention',
+    description: 'Every group member must have the same race',
+    mods: ['Race - Argonian', 'Race - Khajiit'],
+    translations: new Map([
+      [
+        LocalizationOption.ru,
+        {
+          name: 'Обратная дискриминация',
+          description:
+            'Каждый член группы должен быть на персонаже одного указанной расы',
+          mods: ['Раса - аргонианин', 'Раса - каджит'],
         },
       ],
     ]),

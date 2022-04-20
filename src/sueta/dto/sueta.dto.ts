@@ -14,6 +14,7 @@ export class SuetaDto {
   @Param({
     description: 'Locale you want to see result in',
     type: ParamType.STRING,
+    required: false,
   })
   locale: LocalizationOption;
 }
