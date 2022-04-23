@@ -7,6 +7,7 @@ export class SuetaDto {
   @Param({
     description: 'How hard you want it to be',
     type: ParamType.INTEGER,
+    required: true,
   })
   difficulty: DifficultyCurve;
 
