@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model SpecialCondition {
+  id                 Int                            @id @default(autoincrement())
+  code               String
+  difficultyGrade    Int
+  modifications      SpecialConditionModification[] @relation("SpecialConditions")
+  excludedTrials     SpecialConditionsOnTrials[]
+  excludedConditions SpecialCondition[]             @relation("ConflictingConditions", references: [id])
+  excludedBy         SpecialCondition[]             @relation("ConflictingConditions", references: [id])
+  translations       SpecialConditionTranslation[]  @relation("SpecialConditionTranslation")
+}
+
+model SpecialConditionTranslation {
+  id                 Int              @id @default(autoincrement())
+  name               String
+  description        String
+  locale             String
+  specialCondition   SpecialCondition @relation("SpecialConditionTranslation", fields: [specialConditionId], references: [id])
+  specialConditionId Int
+}
+
+model SpecialConditionModification {
+  id                 Int              @id @default(autoincrement())
+  text               String
+  specialCondition   SpecialCondition @relation("SpecialConditions", fields: [specialConditionId], references: [id])
+  specialConditionId Int
+}
+
+model SpecialConditionsOnTrials {
+  specialConditionId Int
+  specialCondition   SpecialCondition @relation(fields: [specialConditionId], references: [id])
+  trialId            Int
+  trial              Trial            @relation(fields: [trialId], references: [id])
+
+  @@id([specialConditionId, trialId])
+}
+
+model Trial {
+  id                Int                         @id @default(autoincrement())
+  name              String
+  difficultyGrade   Int
+  specialConditions SpecialConditionsOnTrials[]
+}
