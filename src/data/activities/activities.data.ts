@@ -190,7 +190,7 @@ export const activities: Readonly<Activity[]> = Object.freeze([
             'Каждый член группы должен быть на персонаже одного указанного класса',
           mods: [
             'Класс - Чародей',
-            'Класс - Клинок ночи',
+            'Класс - Найтблейд',
             'Класс - Рыцарь-дракон',
             'Класс - Хранитель',
             'Класс - Некромант',
@@ -280,7 +280,7 @@ export const activities: Readonly<Activity[]> = Object.freeze([
         LocalizationOption.ru,
         {
           name: 'Я его слепила из того, что было',
-          description: 'Разрешены только PvP сеты',
+          description: 'Разрешены только сеты из пвп',
         },
       ],
     ]),
