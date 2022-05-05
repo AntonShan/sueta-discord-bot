@@ -7,6 +7,7 @@ import { Intents } from 'discord.js';
 import { SuetaController } from './sueta.controller';
 import { CommonModule } from '../common/common.module';
 import { DataModule } from '../data/data.module';
+import { GithubLinkCommand } from './github.command';
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { DataModule } from '../data/data.module';
     CommonModule,
     DataModule,
   ],
-  providers: [SuetaService, SuetaCommand],
+  providers: [SuetaService, SuetaCommand, GithubLinkCommand],
   controllers: [SuetaController],
 })
 export class SuetaModule {}
