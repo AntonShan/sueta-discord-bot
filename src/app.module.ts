@@ -9,16 +9,19 @@ import { DataModule } from './data/data.module';
 const validationSchema = Joi.object({
   DISCORD_TOKEN: Joi.string().required(),
   BOT_INTENTS: Joi.number().integer().required(),
+  RANDOM_SEED: Joi.number().default(123),
 });
 
 interface AppConfig {
   discordToken: string;
   botIntents: BigInt;
+  randomSeed: number;
 }
 
 const configuration: ConfigFactory<AppConfig> = () => ({
   discordToken: process.env.DISCORD_TOKEN,
   botIntents: BigInt(process.env.BOT_INTENTS),
+  randomSeed: +process.env.RANDOM_SEED,
 });
 
 @Module({
