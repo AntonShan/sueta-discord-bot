@@ -6,35 +6,30 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider = "mysql"
+  url      = env("DATABASE_CONNECTION_STRING")
 }
 
 model SpecialCondition {
   id                 Int                            @id @default(autoincrement())
-  code               String
-  difficultyGrade    Int
+  name               String
+  description        String
+  locale             String                         @default("en")
+  difficultyGrade    Int                            @default(0)
   modifications      SpecialConditionModification[] @relation("SpecialConditions")
   excludedTrials     SpecialConditionsOnTrials[]
   excludedConditions SpecialCondition[]             @relation("ConflictingConditions", references: [id])
   excludedBy         SpecialCondition[]             @relation("ConflictingConditions", references: [id])
-  translations       SpecialConditionTranslation[]  @relation("SpecialConditionTranslation")
-}
-
-model SpecialConditionTranslation {
-  id                 Int              @id @default(autoincrement())
-  name               String
-  description        String
-  locale             String
-  specialCondition   SpecialCondition @relation("SpecialConditionTranslation", fields: [specialConditionId], references: [id])
-  specialConditionId Int
+  translations       SpecialCondition[]             @relation("SpecialConditionTranslation")
+  mainConditionId    Int?
+  mainCondition      SpecialCondition?               @relation("SpecialConditionTranslation", references: [id], fields: [mainConditionId])
 }
 
 model SpecialConditionModification {
   id                 Int              @id @default(autoincrement())
   text               String
-  specialCondition   SpecialCondition @relation("SpecialConditions", fields: [specialConditionId], references: [id])
-  specialConditionId Int
+  specialCondition   SpecialCondition? @relation("SpecialConditions", fields: [specialConditionId], references: [id])
+  specialConditionId Int?
 }
 
 model SpecialConditionsOnTrials {
@@ -49,6 +44,6 @@ model SpecialConditionsOnTrials {
 model Trial {
   id                Int                         @id @default(autoincrement())
   name              String
-  difficultyGrade   Int
+  difficultyGrade   Int                            @default(0)
   specialConditions SpecialConditionsOnTrials[]
 }

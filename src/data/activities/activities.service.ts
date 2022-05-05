@@ -1,38 +1,43 @@
 import { Injectable } from '@nestjs/common';
+import { SpecialCondition, SpecialConditionModification } from '@prisma/client';
 import { UtilsService } from '../../common/utils.service';
-import { activities } from './activities.data';
 import { DifficultyCurve } from '../../sueta/types/difficulty-curve.type';
-import { Activity, ResultingActivity } from './activities.types';
+import { ResultingActivity } from './activities.types';
 import { LocalizationOption } from '../../sueta/types/localization-option';
+import { SpecialConditionsService } from '../../database/special-conditions/special-conditions.service';
 
 @Injectable()
 export class ActivitiesService {
-  constructor(private readonly utilsService: UtilsService) {}
+  constructor(
+    private readonly specialConditionsService: SpecialConditionsService,
+    private readonly utilsService: UtilsService,
+  ) {}
 
-  getActivitiesForDifficulty(
+  async getActivitiesForDifficulty(
     difficulty: DifficultyCurve,
     locale: LocalizationOption,
-  ): ResultingActivity[] {
+  ): Promise<ResultingActivity[]> {
+    const activities = await this.specialConditionsService.getSpecialConditions(
+      locale,
+    );
+
     return this.utilsService
       .randomNoRepeats([...activities], difficulty)
-      .map((activity) => {
-        return this.transformActivity(activity, locale);
-      });
+      .map((activity) => this.transformActivity(activity));
   }
 
   transformActivity(
-    activity: Activity,
-    locale: LocalizationOption,
+    activity: SpecialCondition & {
+      modifications: SpecialConditionModification[];
+    },
   ): ResultingActivity {
-    const translatedActivity = activity.translations.get(locale) ?? activity;
-    const mods = translatedActivity.mods ?? [];
-    const [mod] = this.utilsService.randomNoRepeats(mods, 1);
+    const [mod] = this.utilsService.randomNoRepeats(activity.modifications, 1);
 
     return {
-      name: translatedActivity.name,
+      name: activity.name,
       description: mod
-        ? `${translatedActivity.description} ${mod}`
-        : translatedActivity.description,
+        ? `${activity.description} ${mod.text}`
+        : activity.description,
     };
   }
 }

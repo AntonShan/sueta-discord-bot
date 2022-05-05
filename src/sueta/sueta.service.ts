@@ -30,14 +30,14 @@ export class SuetaService {
     return sueta;
   }
 
-  private rollTrial(difficulty: DifficultyCurve): Trial {
+  private async rollTrial(difficulty: DifficultyCurve): Promise<Trial> {
     return this.trialsService.getTrial();
   }
 
-  private rollSuetaList(
+  private async rollSuetaList(
     difficulty: DifficultyCurve,
     locale: LocalizationOption,
-  ): ResultingActivity[] {
+  ): Promise<ResultingActivity[]> {
     return this.activitiesService.getActivitiesForDifficulty(
       difficulty,
       locale,
