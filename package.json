@@ -2,6 +2,10 @@
   "name": "sueta-bot",
   "version": "0.0.1",
   "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AntonShan/sueta-discord-bot"
+  },
   "author": "",
   "private": true,
   "license": "UNLICENSED",
