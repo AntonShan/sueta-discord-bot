@@ -10,18 +10,21 @@ const validationSchema = Joi.object({
   DISCORD_TOKEN: Joi.string().required(),
   BOT_INTENTS: Joi.number().integer().required(),
   RANDOM_SEED: Joi.number().default(123),
+  GITHUB_LINK: Joi.string().required(),
 });
 
 interface AppConfig {
   discordToken: string;
   botIntents: BigInt;
   randomSeed: number;
+  githubLink: string;
 }
 
 const configuration: ConfigFactory<AppConfig> = () => ({
   discordToken: process.env.DISCORD_TOKEN,
   botIntents: BigInt(process.env.BOT_INTENTS),
   randomSeed: +process.env.RANDOM_SEED,
+  githubLink: process.env.npm_package_repository_url ?? process.env.GITHUB_LINK,
 });
 
 @Module({
