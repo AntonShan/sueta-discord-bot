@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { UtilsService } from '../../common/utils.service';
 import { activities } from './activities.data';
-import { DifficultyCurve } from '../../sueta/types/difficulty-curve.type';
+import {
+  DifficultyCurve,
+  difficultySettings,
+} from '../../sueta/types/difficulty-curve.type';
 import { Activity, ResultingActivity } from './activities.types';
 import { LocalizationOption } from '../../sueta/types/localization-option';
 
@@ -9,15 +12,26 @@ import { LocalizationOption } from '../../sueta/types/localization-option';
 export class ActivitiesService {
   constructor(private readonly utilsService: UtilsService) {}
 
-  getActivitiesForDifficulty(
-    difficulty: DifficultyCurve,
-    locale: LocalizationOption,
-  ): ResultingActivity[] {
-    return this.utilsService
-      .randomNoRepeats([...activities], difficulty)
-      .map((activity) => {
-        return this.transformActivity(activity, locale);
-      });
+  getActivitiesForDifficulty(difficulty: DifficultyCurve): Activity[] {
+    const difficultyConfig =
+      difficultySettings.get(difficulty) ??
+      difficultySettings.get(DifficultyCurve['Filthy casual']);
+    console.dir({ difficultyConfig, difficulty });
+    const resultingList = new Set<Activity>();
+    const activitiesSorted = new Set(this.utilsService.randomSort(activities));
+    const activitiesToSkip = new Set<Activity>();
+
+    for (const activity of activitiesSorted) {
+      if (resultingList.size >= difficultyConfig.maxConditions) break;
+      if (activitiesToSkip.has(activity)) continue;
+
+      resultingList.add(activity);
+      activity.excludingActivities?.forEach((activity) =>
+        activitiesToSkip.add(activity),
+      );
+    }
+
+    return this.utilsService.randomSort([...resultingList]);
   }
 
   transformActivity(

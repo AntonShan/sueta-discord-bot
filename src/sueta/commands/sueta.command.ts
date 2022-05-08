@@ -8,9 +8,9 @@ import {
 } from '@discord-nestjs/core';
 import { TransformPipe } from '@discord-nestjs/common';
 import { MessageEmbed, WebhookEditMessageOptions } from 'discord.js';
-import { SuetaDto } from './dto/sueta.dto';
-import { SuetaService } from './sueta.service';
-import { LocalizationOption } from './types/localization-option';
+import { SuetaDto } from '../dto/sueta.dto';
+import { SuetaService } from '../sueta.service';
+import { LocalizationOption } from '../types/localization-option';
 
 @Command({
   name: 'sueta',
@@ -29,7 +29,7 @@ export class SuetaCommand implements DiscordTransformedCommand<SuetaDto> {
 
     const { difficulty, locale = LocalizationOption.ru } = dto;
 
-    const reply = await this.roll(difficulty + 1, locale);
+    const reply = await this.roll(difficulty, locale);
 
     await interaction.interaction.editReply(reply);
   }

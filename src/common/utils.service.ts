@@ -10,10 +10,21 @@ export class UtilsService {
     this.generator = new MercenneTwister(configService.get('randomSeed'));
   }
 
+  randomSort<T>(array: Readonly<T[]>): T[] {
+    return [...array].sort(
+      () =>
+        this.generator.random_long() * this.generator.random_long() -
+        this.generator.random_long() * this.generator.random_long(),
+    );
+  }
+
   randomNoRepeats<T>(array: T[], n: number): T[] {
-    const sliceEnd = Math.floor(this.generator.random() * array.length);
-    return array
-      .sort(() => Math.random() - Math.random())
-      .slice(sliceEnd - n, sliceEnd);
+    const randomSliceEnd = Math.floor(this.generator.random() * array.length);
+    const randomSliceStart = randomSliceEnd - n;
+    const sliceStart = randomSliceStart < 0 ? 0 : randomSliceStart;
+    const sliceEnd = sliceStart + n;
+    const returnValue = this.randomSort(array).slice(sliceStart, sliceEnd);
+
+    return returnValue;
   }
 }
