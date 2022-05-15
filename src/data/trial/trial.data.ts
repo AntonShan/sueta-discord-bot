@@ -35,6 +35,14 @@ export const trialHardmodes: Set<Trial> = new Set([
   RockgroveHM,
 ]);
 
+export const trialsForDummies: Readonly<Trial[]> = Object.freeze([
+  AetherianArchive,
+  AetherianArchiveHM,
+  HelRaCitadel,
+  SanctumOphidia,
+  SanctumOphidiaHM,
+]);
+
 export const trials: Readonly<Trial[]> = Object.freeze([
   AetherianArchive,
   AetherianArchiveHM,
