@@ -1,5 +1,7 @@
 import { Activity } from '../activities.types';
 import { LocalizationOption } from '../../../sueta/types/localization-option';
+import { furryConventionActivity } from './furry-convention.activity';
+import { fistingActivity } from './fisting.activity';
 
 export const illusionOfChoiceActivity: Readonly<Activity> = Object.freeze({
   name: 'The illusion of free choice',
@@ -12,6 +14,10 @@ export const illusionOfChoiceActivity: Readonly<Activity> = Object.freeze({
     'Class - Necromancer',
     'Class - Templar',
   ],
+  excludingActivities: new Set<Activity>([
+    furryConventionActivity,
+    fistingActivity,
+  ]),
   translations: new Map([
     [
       LocalizationOption.ru,

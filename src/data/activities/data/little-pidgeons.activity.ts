@@ -1,17 +1,17 @@
 import { Activity } from '../activities.types';
 import { LocalizationOption } from '../../../sueta/types/localization-option';
 import {
-  AetherianArchive,
+  AetherianArchiveHM,
   AsylumSanctorium,
   AsylumSanctoriumHM,
   Cloudrest,
   CloudrestHM,
   HallsOfFabrication,
-  HelRaCitadel,
+  HelRaCitadelHM,
   KynesAegis,
   MawOfLorkhaj,
   Rockgrove,
-  SanctumOphidia,
+  SanctumOphidiaHM,
   Sunspire,
 } from '../../trial/trial.data';
 import { offMetaMeta } from './off-meta-meta.activity';
@@ -23,9 +23,9 @@ export const littlePidgeonsActivity: Readonly<Activity> = Object.freeze({
   // Excluded as this condition is already included into this one by mechanics of the game
   excludingActivities: new Set([offMetaMeta]),
   excludingTrials: new Set([
-    AetherianArchive,
-    HelRaCitadel,
-    SanctumOphidia,
+    AetherianArchiveHM,
+    HelRaCitadelHM,
+    SanctumOphidiaHM,
     MawOfLorkhaj,
     HallsOfFabrication,
     AsylumSanctorium,
